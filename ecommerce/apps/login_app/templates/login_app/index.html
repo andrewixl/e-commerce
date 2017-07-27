@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body align='center'>
+	{%if messages%}
+		{%for message in messages%}
+			<p>{{message}}</p>
+		{%endfor%}
+	{%endif%}
+	<h1>Register</h1>
+	<form action='/register' method='post'>
+		{%csrf_token%}
+		<input type="text" name="first_name" placeholder="Enter your First Name." size=30><br>
+		<br>
+		<input type="text" name="last_name" placeholder="Enter your Last Name." size=30><br>
+		<br>
+		<input type="email" name="email" placeholder="Enter your Email." size=30><br>
+		<br>
+		<input type="password" name="password" placeholder="Enter your Password." size=30><br>
+		<br>
+		<input type="password" name="confirm_password" placeholder="Confirm Password." size=30><br>
+		<br>
+		<input type='submit' value='Register'>
+	</form>
+
+	<h1>Login</h1>
+	<form action='/login' method='post'>
+		{%csrf_token%}
+		<input type="email" name="email" placeholder="Enter your Email." size=30><br>
+		<br>
+		<input type="password" name="password" placeholder="Enter your Password." size=30><br>
+		<br>
+		<input type='submit' value='Login'>
+	</form>
+
+</body>
+</html>
