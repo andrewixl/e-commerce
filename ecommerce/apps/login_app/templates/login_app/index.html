@@ -1,39 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	{% load staticfiles %}
+	<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'login_app/css/index.css' %}" media="screen" title="no title"  charset="utf-8">
+	<title>Document</title>
 </head>
-<body align='center'>
-	{%if messages%}
-		{%for message in messages%}
-			<p>{{message}}</p>
-		{%endfor%}
-	{%endif%}
-	<h1>Register</h1>
-	<form action='/register' method='post'>
-		{%csrf_token%}
-		<input type="text" name="first_name" placeholder="Enter your First Name." size=30><br>
-		<br>
-		<input type="text" name="last_name" placeholder="Enter your Last Name." size=30><br>
-		<br>
-		<input type="email" name="email" placeholder="Enter your Email." size=30><br>
-		<br>
-		<input type="password" name="password" placeholder="Enter your Password." size=30><br>
-		<br>
-		<input type="password" name="confirm_password" placeholder="Confirm Password." size=30><br>
-		<br>
-		<input type='submit' value='Register'>
-	</form>
-
-	<h1>Login</h1>
-	<form action='/login' method='post'>
-		{%csrf_token%}
-		<input type="email" name="email" placeholder="Enter your Email." size=30><br>
-		<br>
-		<input type="password" name="password" placeholder="Enter your Password." size=30><br>
-		<br>
-		<input type='submit' value='Login'>
-	</form>
-
+<body>
+	<header>
+		<h1>The Silk Road</h1>
+	</header>
+	<div id="wrapper" align='center'>
+		{%if messages%}
+			{%for message in messages%}
+				<p>{{message}}</p>
+			{%endfor%}
+		{%endif%}
+		<div id="register" align='center'>
+			<h1>Register</h1>
+			<form action='/register' method='post'>
+				{%csrf_token%}
+				<input type="text" name="first_name" placeholder="Enter your First Name." size=30><br>
+				<br>
+				<input type="text" name="last_name" placeholder="Enter your Last Name." size=30><br>
+				<br>
+				<input type="text" name="username" placeholder="Enter Username." size=30><br>
+				<br>
+				<input type="email" name="email" placeholder="Enter your Email." size=30><br>
+				<br>
+				<input type="password" name="password" placeholder="Enter your Password." size=30><br>
+				<br>
+				<input type="password" name="confirm_password" placeholder="Confirm Password." size=30><br>
+				<br>
+				<input type="radio" name="merchant_type" value="Merchant"> Merchant
+	  		<input type="radio" name="merchant_type" value="Seller"> Seller<br>
+				<br>
+				<input type='submit' value='Register'>
+			</form>
+		</div>
+		<div id="login" align='center'>
+			<h1>Login</h1>
+			<form action='/login' method='post'>
+				{%csrf_token%}
+				<input type="text" name="username" placeholder="Enter your Username." size=30><br>
+				<br>
+				<input type="password" name="password" placeholder="Enter your Password." size=30><br>
+				<br>
+				<input type='submit' value='Login'>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
