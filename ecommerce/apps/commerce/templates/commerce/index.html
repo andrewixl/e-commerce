@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  {%if messages%}
+    {%for message in messages%}
+      <p>{{message}}</p>
+    {%endfor%}
+  {%endif%}
+  <h2>Hello {{request.session.first_name}} {{request.session.last_name}}</h2>
+  <form class="logout" action="/logout" method="post">
+    {% csrf_token %}
+    <input type="submit" name="logout" value="Logout">
+  </form>
+  <h3>Your Trip Schedules:</h3>
+  <table border="1">
+  <tr>
+    <th>Destination</th>
+    <th>Description</th>
+    <th>Travel Start Date</th>
+    <th>Travel End Date</th>
+  </tr>
+    {%for myplans in myplans%}
+      <tr>
+        <td><a href="/user/plan/{{myplans.id}}">{{myplans.destination}}</a></td>
+        <td>{{myplans.description}}</td>
+        <td>{{myplans.travelstartdate}}</td>
+        <td>{{myplans.travelenddate}}</td>
+      </tr>
+    {%endfor%}
+  </table>
+  <br><br>
+  <h3>Other User's Travel Plans:</h3>
+  <table border="1">
+  <tr>
+    <th>Name</th>
+  	<th>Destination</th>
+  	<th>Description</th>
+  	<th>Travel Start Date</th>
+    <th>Travel End Date</th>
+  	<th>Action</th>
+  </tr>
+  	{%for other in other%}
+  		<tr>
+  			<td>{{other.owner.first_name}} {{other.owner.last_name}}</td>
+  			<td><a href="/user/plan/{{other.id}}">{{other.destination}}</a></td>
+  			<td>{{other.description}}</td>
+        <td>{{other.travelstartdate}}</td>
+        <td>{{other.travelenddate}}</td>
+        <td><a href="/user/join/{{other.id}}">Join</a></td>
+  		</tr>
+  	{%endfor%}
+  </table><br><br>
+  <a href="/user/addtravelplan">Add Travel Plan</a>
+</body>
+</html>
