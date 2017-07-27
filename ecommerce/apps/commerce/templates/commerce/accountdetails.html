@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+  	<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'commerce/css/productdetails.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+  		<h1>The Silk Road</h1>
+      <a href="/logout"><p>Logout</p></a>
+      <a href="/user/account"><p>Account</p></a>
+      <p>Hello, {{request.session.first_name}} {{request.session.last_name}}</p>
+  	</header>
+  	<div id="wrapper">
+  		<div class="messages">
+  			{%if messages%}
+  				{%for message in messages%}
+  					<p>{{message}}</p>
+  				{%endfor%}
+  			{%endif%}
+  		</div>
+    <h4>Name: {{user.first_name}} {{user.last_name}}</h4>
+    <h4>Username: {{user.username}}</h4>
+    <h4>Email: {{user.email}}</h4>
+    <h4>Account Type: {{user.merchant_type}}</h4>
+    <h4>Account Created On: {{user.created_at}}</h4>
+  </div>
+  </body>
+</html>

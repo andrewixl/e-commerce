@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+  	<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'commerce/css/productdetails.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+  		<h1>The Silk Road</h1>
+      <a href="/logout"><p>Logout</p></a>
+      <a href="/user/account"><p>Account</p></a>
+      <p>Hello, {{request.session.first_name}} {{request.session.last_name}}</p>
+  	</header>
+  	<div id="wrapper">
+  		<div class="messages">
+  			{%if messages%}
+  				{%for message in messages%}
+  					<p>{{message}}</p>
+  				{%endfor%}
+  			{%endif%}
+  		</div>
+    <h3>{{product.product_name}}</h3>
+    <h4>&nbsp&nbsp&nbsp&nbsp Sold By: {{product.seller.username}}</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Price: ${{product.price}}</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Weight: {{product.weight}}lb.</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Description: {{product.description}}</h4>
+  </div>
+  </body>
+</html>
