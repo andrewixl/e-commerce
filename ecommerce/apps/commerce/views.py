@@ -12,7 +12,7 @@ def genErrors(request, Emessages):
         messages.error(request, message)
 
 def index(request):
-    User.objects.all().delete()
+    #User.objects.all().delete()
     try:
         request.session['user_id']
     except KeyError:
