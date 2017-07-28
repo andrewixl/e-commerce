@@ -14,6 +14,7 @@
   		<a href="/user/home" class = "title"><h1>The Silk Road</h1></a>
       <a href="/logout" class = "label"><p>Logout</p></a>
       <a href="/user/account" class = "label"><p>Account</p></a>
+      <a href="/user/cart" class = "label"><p>Cart</p></a>
       {%if request.session.account_type == 'merchant'%}
         <a href="/user/addproduct" class = "label"><p>Add Product</p></a>
       {%endif%}
@@ -37,6 +38,15 @@
         <h4>Weight: {{product.weight}}lb.</h4>
         <h4>Description: {{product.description}}</h4>
         <h4>Views: {{product.views}}</h4>
+        {%if request.session.user_id == product.seller.id%}
+        <a href="/user/product/delete/{{product.id}}"><button type="button" name="delete_product">Delete Product</button></a>
+        {%else%}
+        <form class="add_cart" action="/user/product/addcart/{{product.id}}" method="post">
+          {% csrf_token %}
+          <input type="number" name="quantity" placeholder="Qty">
+          <input type="submit" name="addcart" value="Add to Cart">
+        </form>
+        {%endif%}
       </div>
   </div>
   </body>

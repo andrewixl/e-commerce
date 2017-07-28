@@ -4,7 +4,6 @@
   margin-top: 200px;
   position: relative;
   top: -80px;
-  border: 1px solid black;
 }
 header{
  width: auto;
@@ -52,7 +51,7 @@ header>p, .label{
   top: 80px;
 }
 .product{
-  border: 1px solid black;
+  text-decoration: none;
   width: 350px;
   display: inline-block;
 }

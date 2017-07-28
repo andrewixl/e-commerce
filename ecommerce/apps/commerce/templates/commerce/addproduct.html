@@ -14,6 +14,7 @@
 		<a href="/user/home" class = "title"><h1>The Silk Road</h1></a>
     <a href="/logout" class = "label"><p>Logout</p></a>
     <a href="/user/account" class = "label"><p>Account</p></a>
+    <a href="/user/cart" class = "label"><p>Cart</p></a>
     {%if request.session.account_type == 'merchant'%}
       <a href="/user/addproduct" class = "label"><p>Add Product</p></a>
     {%endif%}
@@ -31,10 +32,10 @@
     <form class="addproduct" action="verifyproduct" method="post" align='center'>
       {% csrf_token %}
       <input type="text" name="product_name" placeholder="Add Product Name." size=30><br><br>
-      <input type="text" name="price" placeholder="Add Price." size=30><br><br>
+      $<input type="text" name="price" placeholder="Add Price." size=30><br><br>
       <input type="text" name="weight" placeholder="Add Weight in Pounds." size=30>lb.<br><br>
       <input type="text" name="image_link" placeholder="Enter Image Link (Optional)" size=30><br><br>
-      <textarea name="description" placeholder="Add Description." rows="8" cols="80"></textarea>
+      <textarea name="description" placeholder="Add Description." rows="8" cols="80"></textarea><br><br>
       <input type="submit" name="addproduct" value="Add Product"><br><br>
     </form>
   </div>

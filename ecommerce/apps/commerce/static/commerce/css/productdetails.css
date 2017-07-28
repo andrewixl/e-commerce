@@ -45,7 +45,6 @@ header>p, .label{
   color: red;
 }
 .product{
-  border: 1px solid black;
   width: 550px;
   display: inline-block;
 }
@@ -59,7 +58,6 @@ header>p, .label{
   text-align: center;
 }
 .descrip{
-  border: 1px solid black;
   width: 550px;
   display: inline-block;
   vertical-align: top;

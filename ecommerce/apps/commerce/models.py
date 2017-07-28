@@ -42,6 +42,7 @@ class Product(models.Model):
     description = models.CharField(max_length=500)
     views = models.IntegerField()
     seller = models.ForeignKey('login_app.User')
+    purchaser = models.ManyToManyField('login_app.User', related_name="purchaser")
     reviews = models.ManyToManyField('login_app.User', related_name="reviews")
     cart = models.ManyToManyField('login_app.User', related_name="carted")
     created_at = models.DateTimeField(auto_now_add=True)

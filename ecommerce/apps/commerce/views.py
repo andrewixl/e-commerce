@@ -26,6 +26,23 @@ def index(request):
     'products': products
     }
     return render(request, 'commerce/index.html', context)
+
+def cart(request):
+    #User.objects.all().delete()
+    try:
+        request.session['user_id']
+    except KeyError:
+        return redirect("/")
+    # # myplans = Plan.objects.filter(Q(owner = request.session['user_id']) | Q(joiners = request.session['user_id'])).all()
+    # # other = Plan.objects.exclude(Q(owner = request.session['user_id']) | Q(joiners = request.session['user_id'])).all()
+    products = Product.objects.filter(purchaser = request.session['user_id']).all()
+    context = {
+    # 'myplans': myplans.order_by("-created_at"),
+    # 'other': other.order_by("-created_at")
+    'products': products
+    }
+    return render(request, 'commerce/cart.html', context)
+
 def productdetails(request, product_id):
     try:
         request.session['user_id']
@@ -41,6 +58,25 @@ def productdetails(request, product_id):
     #"user":users,
     }
     return render(request, 'commerce/productdetails.html', context)
+
+def addcart(request, product_id):
+    try:
+        request.session['user_id']
+    except KeyError:
+        return redirect("/")
+    product = Product.objects.get(id = product_id)
+    user = User.objects.get(id=request.session['user_id'])
+    product.purchaser.add(user)
+    return redirect("/user/cart")
+
+def deleteproduct(request, product_id):
+    try:
+        request.session['user_id']
+    except KeyError:
+        return redirect("/")
+    product = Product.objects.get(id = product_id).delete()
+    messages.success(request, 'Product Deleted!')
+    return redirect("/user/home")
 
 def accountdetails(request):
     try:
