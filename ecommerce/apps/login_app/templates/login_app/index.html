@@ -7,6 +7,8 @@
 	{% load staticfiles %}
 	<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'login_app/css/index.css' %}" media="screen" title="no title"  charset="utf-8">
+	<script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script src="{% static 'login_app/js/index.js' %}"></script>
 	<title>Document</title>
 </head>
 <body>
@@ -37,8 +39,10 @@
 				<br>
 				<input type="password" name="confirm_password" placeholder="Confirm Password." size=30><br>
 				<br>
-				<input type="radio" name="merchant_type" value="Merchant"> Merchant
-	  		<input type="radio" name="merchant_type" value="Seller"> Seller<br>
+				<input type="radio" class = "merchantradio" name="account_type" value="merchant"> Merchant
+	  		<input type="radio" class = "consumerradio" name="account_type" value="consumer"> Consumer<br>
+				<br>
+				<div class="authcode"></div>
 				<br>
 				<input type='submit' value='Register'>
 			</form>

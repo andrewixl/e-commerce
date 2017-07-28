@@ -51,17 +51,3 @@ header>p, .label{
   position: fixed;
   top: 80px;
 }
-.product{
-  border: 1px solid black;
-  width: 350px;
-  display: inline-block;
-}
-.product>img{
-  width: 350px;
-  vertical-align: top;
-}
-.product>p{
-  text-decoration: none;
-  font-size: 30px;
-  text-align: center;
-}

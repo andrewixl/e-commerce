@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from django.db import models
 from ..login_app.models import User
 from datetime import datetime
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 
 class ProductManager(models.Manager):
     def createProduct(self, postData, user_id):
@@ -18,11 +20,17 @@ class ProductManager(models.Manager):
         if len(postData['description']) < 10:
 			results['status'] = False
 			results['errors'].append('Description Must be at Least 10 Characters.')
+        url = URLValidator()
+        try:
+            url(postData['image_link'])
+        except:
+            results['status'] = False
+            results['errors'].append('Please Enter Proper Url such as http://google.com')
 
         if results['status'] == True:
             userInt = int(user_id)
             user = User.objects.get(id=userInt)
-            results['product'] = Product.objects.create(product_name=postData['product_name'], price=postData['price'], weight=postData['weight'], description=postData['description'], seller=user)
+            results['product'] = Product.objects.create(product_name=postData['product_name'], price=postData['price'], weight=postData['weight'], image_link=postData['image_link'], description=postData['description'], views=0, seller=user)
         return results
 
 
@@ -30,7 +38,9 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.FloatField()
     weight = models.FloatField()
+    image_link = models.URLField(max_length=500, default="http://polyureashop.studio.crasman.fi/pub/web/img/no-image.jpg")
     description = models.CharField(max_length=500)
+    views = models.IntegerField()
     seller = models.ForeignKey('login_app.User')
     reviews = models.ManyToManyField('login_app.User', related_name="reviews")
     cart = models.ManyToManyField('login_app.User', related_name="carted")

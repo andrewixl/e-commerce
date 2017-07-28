@@ -7,6 +7,7 @@ import bcrypt
 # Create your models here.
 class UserManager(models.Manager):
 	def registerVal(self, postData):
+		print postData
 		results = {'status': True, 'errors': [], 'user': None}
 		if len(postData['first_name']) < 3 and len(postData['first_name']) > 50:
 			results['status'] = False
@@ -23,6 +24,9 @@ class UserManager(models.Manager):
 		if len(postData['password']) < 4 or postData['password'] != postData['confirm_password']:
 			results['status'] = False
 			results['errors'].append('Please Enter a Set of Matching Valid Password.')
+		if postData["account_type"] == "merchant" and not postData["merchant_code"] == "xxc636":
+			results['status'] = False
+			results['errors'].append('Please Enter a Valid Merchant Auth Code.')
 
 		user = User.objects.filter(username=postData['username'])
 		print user, '*****', len(user)
@@ -35,7 +39,7 @@ class UserManager(models.Manager):
 	def createUser(self, postData):
 		p_hash = bcrypt.hashpw(postData['password'].encode(), bcrypt.gensalt())
 		user = User.objects.create(
-		    first_name=postData['first_name'], last_name=postData['last_name'], username = postData['username'], email=postData['email'], password=p_hash, merchant_type = postData['merchant_type'])
+		    first_name=postData['first_name'], last_name=postData['last_name'], username = postData['username'], email=postData['email'], password=p_hash, account_type = postData['account_type'])
 		return user
 
 	def loginVal(self, postData):
@@ -59,7 +63,7 @@ class User(models.Model):
 	username = models.CharField(max_length=20)
 	email = models.CharField(max_length=250)
 	password = models.CharField(max_length=50)
-	merchant_type = models.CharField(max_length=400)
+	account_type = models.CharField(max_length=400)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now = True)
 	objects = UserManager()

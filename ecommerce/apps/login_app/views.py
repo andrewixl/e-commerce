@@ -41,6 +41,8 @@ def login(request):
 	request.session['first_name'] = results['user'][0].first_name
 	request.session['last_name'] = results['user'][0].last_name
 	request.session['email'] = results['user'][0].email
+	request.session['username'] = results['user'][0].username
+	request.session['account_type'] = results['user'][0].account_type
 	request.session['user_id'] = results['user'][0].id
 	print request.session['user_id']
 	return redirect('/user/home')

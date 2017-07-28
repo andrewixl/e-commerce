@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^account$', views.accountdetails),
     url(r'^addproduct$', views.addproductpage),
     url(r'^verifyproduct$', views.verifyproduct),
-    url(r'^product/(?P<product_id>\d+)$', views.productdetails)
+    url(r'^product/(?P<product_id>\d+)$', views.productdetails),
+    url(r'^flush$', views.flush),
 ]

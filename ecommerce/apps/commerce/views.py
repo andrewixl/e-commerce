@@ -19,20 +19,22 @@ def index(request):
         return redirect("/")
     # myplans = Plan.objects.filter(Q(owner = request.session['user_id']) | Q(joiners = request.session['user_id'])).all()
     # other = Plan.objects.exclude(Q(owner = request.session['user_id']) | Q(joiners = request.session['user_id'])).all()
-    products = Product.objects.all()
+    products = Product.objects.all()[:8]
     context = {
     # 'myplans': myplans.order_by("-created_at"),
     # 'other': other.order_by("-created_at")
-    'products': products.order_by("-created_at")
+    'products': products
     }
     return render(request, 'commerce/index.html', context)
-
 def productdetails(request, product_id):
     try:
         request.session['user_id']
     except KeyError:
         return redirect("/")
     product = Product.objects.get(id = product_id)
+    print product.image_link
+    product.views +=1
+    product.save()
     #users = User.objects.filter(joiners = plan_id).all()
     context = {
     'product': product,
@@ -80,3 +82,8 @@ def join(request, plan_id):
     # this_plan = Plan.objects.get(id=plan_id)
     # this_plan.joiners.add(this_user)
     return redirect("/user/home")
+
+def flush(request):
+    #User.objects.all().delete()
+    Product.objects.all().delete()
+    return redirect('/')

@@ -11,12 +11,16 @@
 </head>
 <body>
   <header>
-		<h1>The Silk Road</h1>
-    <a href="/logout"><p>Logout</p></a>
-    <a href="/user/account"><p>Account</p></a>
-    <p>Hello, {{request.session.first_name}} {{request.session.last_name}}</p>
+		<a href="/user/home" class ="title"><h1>The Silk Road</h1></a>
+    <a href="/logout" class = "label"><p>Logout</p></a>
+    <a href="/user/account" class = "label"><p>Account</p></a>
+    {%if request.session.account_type == 'merchant'%}
+      <a href="/user/addproduct" class = "label"><p>Add Product</p></a>
+    {%endif%}
+    <p>Hello, {{request.session.first_name}}</p>
 	</header>
 	<div id="wrapper">
+    <h6 class = "account">Account Type: {{request.session.account_type}}</h6>
 		<div class="messages">
 			{%if messages%}
 				{%for message in messages%}
@@ -24,11 +28,14 @@
 				{%endfor%}
 			{%endif%}
 		</div>
-    <a href="/user/addproduct">Add Product</a>
-    <div class="products">
+    <h2>Newly Added Products:</h2>
+    <div class="products" align='center'>
 			{%if products%}
 				{%for products in products%}
+        <div class="product">
+          <img src="{{ products.image_link }}" alt="Image Not Found">
 					<p><a href="/user/product/{{products.id}}">{{products.product_name}}</a></p>
+        </div>
 				{%endfor%}
 			{%endif%}
 		</div>

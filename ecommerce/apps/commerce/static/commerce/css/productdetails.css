@@ -16,14 +16,15 @@ header{
  bottom: 0px;
  z-index: 1;
 }
-header>h1{
+.title{
+  text-decoration: none;
   font-family: 'Lemonada', cursive;
   color: white;
   display: inline-block;
   position: relative;
   margin-left: 25px;
 }
-header>p, header>a{
+header>p, .label{
   text-decoration: none;
   color: white;
   font-family: 'Kanit', sans-serif;
@@ -37,9 +38,35 @@ header>p, header>a{
   float: right;
   text-align: center;
 }
-header>a{
+.label{
   margin-top: 5px;
 }
 .messages{
   color: red;
+}
+.product{
+  border: 1px solid black;
+  width: 550px;
+  display: inline-block;
+}
+.product>img{
+  width: 550px;
+  vertical-align: top;
+}
+.product>p{
+  text-decoration: none;
+  font-size: 30px;
+  text-align: center;
+}
+.descrip{
+  border: 1px solid black;
+  width: 550px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30px
+}
+.descrip>h4{
+  text-decoration: none;
+  font-size: 30px;
+  text-align: left;
 }
